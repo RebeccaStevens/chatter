@@ -92,6 +92,7 @@
         </paper-toolbar>
 
         <div class="fit layout vertical" id="mainContent">
+          <paper-material>{{activeChatroom.description}}</paper-material>
           <chat-window class="flex">
             <template is="dom-repeat" items="{{activeChatroom.messages}}" as="msg">
               <chat-message from="{{msg.from}}" message="{{msg.message}}"></chat-message>
