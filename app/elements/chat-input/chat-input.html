@@ -15,7 +15,7 @@
         border-radius: 2px;
         padding: 16px;
         background: white;
-        height: 220px;
+        height: 210px;
         @apply(--layout-vertical);
       }
       #from-input,
@@ -34,8 +34,8 @@
       }
     </style>
     <paper-material id="material" elevation="1">
-      <paper-input id="from-input" label="Name:"></paper-input>
-      <paper-textarea id="msg-input" label="Message:" rows="4" max-rows="4"></paper-textarea>
+      <paper-input id="from-input" label="Name:" minlength="2" maxlength="32" required auto-validate></paper-input>
+      <paper-textarea id="msg-input" label="Message:" rows="3" max-rows="3" minlength="1" maxlength="1024" char-counter required auto-validate></paper-textarea>
       <span id="flexer"></span>
       <paper-button id="send-btn" raised on-tap="send">Send</paper-button>
     </paper-material>
@@ -52,10 +52,24 @@
       },
 
       send: function() {
-        this.fire('chat-input-send', {
-          from: this.$['from-input'].value,
-          message: this.$['msg-input'].value
-        });
+        var valid = true;
+        valid = this.$['from-input'].validate() && valid;
+        valid = this.$['msg-input'].validate() && valid;
+
+        if (valid) {
+          this.fire('chat-input-send', {
+            from: this.$['from-input'].value,
+            message: this.$['msg-input'].value
+          });
+        }
+      },
+
+      clearName: function() {
+        this.$['from-input'].value = '';
+      },
+
+      clearMessage: function() {
+        this.$['msg-input'].value = '';
       }
     });
   })();
