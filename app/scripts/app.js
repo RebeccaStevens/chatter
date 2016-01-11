@@ -6,8 +6,10 @@
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
-  app.chatrooms = {
-    'chat room 1': {
+  app.chatrooms = [
+    {
+      id: 'c0',
+      name: 'Chat Room 1',
       description: 'chat and stuff',
       messages: [
         {
@@ -20,7 +22,9 @@
         }
       ]
     },
-    'chat room 2': {
+    {
+      id: 'c1',
+      name: 'Chat Room 2',
       description: 'other stuff',
       messages: [
         {
@@ -37,9 +41,9 @@
         }
       ]
     }
-  };
+  ];
 
-  app.activeChatroom = app.chatrooms['chat room 1'];
+  app.activeChatroom = app.chatrooms[0];
 
   // Sets app default base URL
   app.baseUrl = '/';
@@ -76,6 +80,16 @@
   app.closeDrawer = function() {
     console.log('no drawer');
     // app.$.paperDrawerPanel.closeDrawer();
+  };
+
+  // set the active chatroom based on the given id
+  app.setActiveChatRoom = function(id) {
+    app.chatrooms.forEach(function(e) {
+      if (e.id === id) {
+        app.activeChatroom = e;
+        return false;
+      }
+    });
   };
 
 })(document);

@@ -35,6 +35,11 @@
       app.route = 'home';
     });
 
+    page('/room/:id', function(data) {
+      app.route = 'chatroom';
+      app.setActiveChatRoom(data.params.id);
+    });
+
     // 404
     page('*', function() {
       app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to Home Page';

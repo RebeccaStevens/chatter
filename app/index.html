@@ -71,6 +71,15 @@
         <paper-toolbar id="drawerToolbar">
           <span class="menu-name">Chat Rooms</span>
         </paper-toolbar>
+
+        <paper-menu>
+          <template is="dom-repeat" items="[[chatrooms]]" as="room">
+            <a data-route="room/{{room.id}}" href="room/{{room.id}}">
+              <iron-icon icon="communication:chat"></iron-icon>
+              <span>{{room.name}}</span>
+            </a>
+          </template>
+        </paper-menu>
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
