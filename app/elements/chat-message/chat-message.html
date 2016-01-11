@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 
 <dom-module id="chat-message">
@@ -6,12 +7,14 @@
     <style>
       :host {
         display: block;
+        position: relative;
       }
       #material {
         border-radius: 24px;
         padding: 16px;
         margin: 16px;
         background: lightblue;
+        @apply(--layout-fit);
       }
       #from {
         font-weight: bold;

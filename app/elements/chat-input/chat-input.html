@@ -1,22 +1,39 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
-<dom-module id="chat-window">
+<dom-module id="chat-input">
   <template>
     <style>
       :host {
         display: block;
         position: relative;
+        height: 200px;
       }
       #material {
         border-radius: 2px;
+        padding: 16px;
         background: white;
         @apply(--layout-fit);
+        @apply(--layout-vertical);
+      }
+      #input {
+        --paper-input-container: {
+          padding: 0;
+        };
+        @apply(--layout-flex);
+      }
+      #send-btn {
+        width: 200px;
+        background: #e0eeee;
+        @apply(--layout-self-center);
       }
     </style>
     <paper-material id="material" elevation="1">
-      <content select="chat-message"></content>
+      <paper-textarea id="input" label="Message:" rows="4" max-rows="4"></paper-textarea>
+      <paper-button id="send-btn" raised>Send</paper-button>
     </paper-material>
   </template>
   <script>
@@ -24,7 +41,7 @@
     'use strict';
 
     Polymer({
-      is: 'chat-window',
+      is: 'chat-input',
 
       properties: {
 
