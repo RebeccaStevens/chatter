@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
@@ -14,13 +15,16 @@
         border-radius: 2px;
         padding: 16px;
         background: white;
-        height: 170px;
+        height: 220px;
         @apply(--layout-vertical);
       }
-      #input {
+      #from-input,
+      #msg-input {
         --paper-input-container: {
-          padding: 0;
+          padding-top: 0;
         };
+      }
+      #flexer {
         @apply(--layout-flex);
       }
       #send-btn {
@@ -30,8 +34,10 @@
       }
     </style>
     <paper-material id="material" elevation="1">
-      <paper-textarea id="input" label="Message:" rows="4" max-rows="4"></paper-textarea>
-      <paper-button id="send-btn" raised>Send</paper-button>
+      <paper-input id="from-input" label="Name:"></paper-input>
+      <paper-textarea id="msg-input" label="Message:" rows="4" max-rows="4"></paper-textarea>
+      <span id="flexer"></span>
+      <paper-button id="send-btn" raised on-tap="send">Send</paper-button>
     </paper-material>
   </template>
   <script>
@@ -43,6 +49,13 @@
 
       properties: {
 
+      },
+
+      send: function() {
+        this.fire('chat-input-send', {
+          from: this.$['from-input'].value,
+          message: this.$['msg-input'].value
+        });
       }
     });
   })();
