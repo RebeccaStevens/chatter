@@ -13,11 +13,21 @@
       #material {
         border-radius: 2px;
         background: white;
+        overflow-y: auto;
         @apply(--layout-fit);
+      }
+      #nomsg {
+        border-radius: 12px;
+        padding: 8px;
+        margin: 16px;
+        background: #ffcccc;
+        text-align: center;
+        font-weight: bold;
       }
     </style>
     <paper-material id="material" elevation="1">
-      <content select="chat-message"></content>
+      <paper-material id="nomsg" elevation="1" hidden$="{{_hasMessages}}">No Messages</paper-material>
+      <content id="msgs" select="chat-message"></content>
     </paper-material>
   </template>
   <script>
@@ -28,7 +38,25 @@
       is: 'chat-window',
 
       properties: {
+        _hasMessages: {
+          type: Boolean,
+          value: false,
+          readOnly: true
+        },
 
+        _MsgObserver: {
+          type: Object
+        }
+      },
+
+      ready: function() {
+        this._MsgObserver = Polymer.dom(this.$.msgs).observeNodes(function(info) {
+          this._set_hasMessages(Polymer.dom(this.$.msgs).getDistributedNodes().length > 0);
+          this.$.material.scrollTop = this.$.material.scrollHeight - this.$.material.clientHeight;
+        }.bind(this));
+      },
+      detached: function() {
+        Polymer.dom(this.$.msgs).unobserveNodes(this._MsgObserver);
       }
     });
   })();

@@ -26,20 +26,7 @@
       id: 'c1',
       name: 'Chat Room 2',
       description: 'other stuff',
-      messages: [
-        {
-          from: 'Tim',
-          message: '123'
-        },
-        {
-          from: 'Alex',
-          message: '456'
-        },
-        {
-          from: 'Matt',
-          message: '789'
-        }
-      ]
+      messages: []
     }
   ];
 
@@ -73,13 +60,11 @@
 
   // Scroll page to top and expand header
   app.scrollPageToTop = function() {
-    console.log('no main panel');
-    // app.$.headerPanelMain.scrollToTop(true);
+    app.$.headerPanelMain.scrollToTop(true);
   };
 
   app.closeDrawer = function() {
-    console.log('no drawer');
-    // app.$.paperDrawerPanel.closeDrawer();
+    app.$.paperDrawerPanel.closeDrawer();
   };
 
   // set the active chatroom based on the given id
