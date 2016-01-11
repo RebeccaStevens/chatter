@@ -97,7 +97,7 @@
               <chat-message from="{{msg.from}}" message="{{msg.message}}"></chat-message>
             </template>
           </chat-window>
-          <chat-input></chat-input>
+          <chat-input on-chat-input-send="sendMessage"></chat-input>
         </div>
       </paper-scroll-header-panel>
     </paper-drawer-panel>

@@ -92,4 +92,11 @@
     });
   };
 
+  app.sendMessage = function(event) {
+    app.push('activeChatroom.messages', {
+      from: event.detail.from,
+      message: event.detail.message
+    });
+  };
+
 })(document);
