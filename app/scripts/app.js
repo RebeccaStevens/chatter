@@ -6,6 +6,41 @@
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
+  app.chatrooms = {
+    'chat room 1': {
+      description: 'chat and stuff',
+      messages: [
+        {
+          from: 'Bob',
+          message: 'Hello'
+        },
+        {
+          from: 'Tom',
+          message: 'Test'
+        }
+      ]
+    },
+    'chat room 2': {
+      description: 'other stuff',
+      messages: [
+        {
+          from: 'Tim',
+          message: '123'
+        },
+        {
+          from: 'Alex',
+          message: '456'
+        },
+        {
+          from: 'Matt',
+          message: '789'
+        }
+      ]
+    }
+  };
+
+  app.activeChatroom = app.chatrooms['chat room 1'];
+
   // Sets app default base URL
   app.baseUrl = '/';
   if (window.location.port === '') {  // if production
@@ -24,7 +59,7 @@
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page
   app.addEventListener('dom-change', function() {
-    
+
   });
 
   // See https://github.com/Polymer/polymer/issues/1381

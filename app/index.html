@@ -84,7 +84,9 @@
 
         <div class="fit layout vertical" id="mainContent">
           <chat-window class="flex">
-
+            <template is="dom-repeat" items="{{activeChatroom.messages}}" as="msg">
+              <chat-message from="{{msg.from}}" message="{{msg.message}}"></chat-message>
+            </template>
           </chat-window>
           <chat-input></chat-input>
         </div>
