@@ -1,0 +1,47 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+
+<dom-module id="chat-message">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      #material {
+        border-radius: 24px;
+        padding: 16px;
+        margin: 16px;
+        background: lightblue;
+      }
+      #from {
+        font-weight: bold;
+      }
+      #message {
+        font-kerning: normal;
+      }
+    </style>
+    <paper-material id="material" elevation="1">
+      <div id="from">{{from}}:</div>
+      <div id="message">{{message}}</div>
+    </paper-material>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'chat-message',
+
+      properties: {
+        from: {
+          type: String
+        },
+
+        message: {
+          type: String
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

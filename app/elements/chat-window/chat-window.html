@@ -1,0 +1,36 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+
+<dom-module id="chat-window">
+  <template>
+    <style>
+      :host {
+        display: block;
+        @apply(--layout-flex);
+      }
+      #material {
+        border-radius: 2px;
+        margin: 16px;
+        background: white;
+        @apply(--layout-fit);
+      }
+    </style>
+    <paper-material id="material" elevation="1">
+      <content select="chat-message"></content>
+    </paper-material>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'chat-window',
+
+      properties: {
+
+      }
+    });
+  })();
+  </script>
+</dom-module>
