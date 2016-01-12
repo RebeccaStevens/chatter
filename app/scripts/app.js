@@ -18,7 +18,7 @@
         },
         {
           from: 'Tom',
-          message: 'Test'
+          message: 'Test\n123'
         }
       ]
     },
