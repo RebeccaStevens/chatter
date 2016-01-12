@@ -46,14 +46,29 @@
 
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="shared-styles">
-    #mainContent > * {
+    #mainContent section {
+      @apply(--layout-fit);
+    }
+    #mainContent section > * {
       margin: 8px 16px;
     }
-    #mainContent > *:first-child {
+    #mainContent section > *:first-child {
       margin-top: 16px
     }
-    #mainContent > *:last-child {
+    #mainContent section > *:last-child {
       margin-bottom: 16px;
+    }
+    #mainContent section h1 {
+      font-size: 24pt;
+    }
+    #mainContent section h2 {
+      font-size: 17pt;
+    }
+    #mainContent section h1, h2 {
+      margin: 0.4em 0;
+    }
+    #mainContent section h1:first-child{
+      margin-top: 0;
     }
   </style>
 
@@ -69,12 +84,16 @@
 
         <!-- Drawer Toolbar -->
         <paper-toolbar id="drawerToolbar">
-          <span class="menu-name">Chat Rooms</span>
+          <span class="menu-name">Menu</span>
         </paper-toolbar>
 
         <paper-menu>
+          <a data-route="home" href="[[baseUrl]]">
+            <iron-icon icon="home"></iron-icon>
+            <span>Home</span>
+          </a>
           <template is="dom-repeat" items="[[chatrooms]]" as="room">
-            <a data-route="room/{{room.id}}" href="room/{{room.id}}">
+            <a href="chatroom/{{room.id}}">
               <iron-icon icon="communication:chat"></iron-icon>
               <span>{{room.name}}</span>
             </a>
@@ -91,15 +110,29 @@
           <h1 class="app-name flex">C h a t t e r</h1>
         </paper-toolbar>
 
-        <div class="fit layout vertical" id="mainContent">
-          <paper-material>{{activeChatroom.description}}</paper-material>
-          <chat-window class="flex">
-            <template is="dom-repeat" items="{{activeChatroom.messages}}" as="msg">
-              <chat-message from="{{msg.from}}" message="{{msg.message}}"></chat-message>
-            </template>
-          </chat-window>
-          <chat-input id="chat-input" on-chat-input-send="sendMessage"></chat-input>
-        </div>
+        <iron-pages class="fit" id="mainContent" attr-for-selected="data-route" selected="{{route}}">
+          <!-- Home Page -->
+          <section data-route="home">
+            <paper-material>
+              <h1>Welcome to Chatter</h1>
+              <h2>A chatting application/experiment I made</h2>
+              <p>Choose a chat room from the menu on the side.</p>
+            </paper-material>
+          </section>
+
+          <!-- Chat Room Page -->
+          <section data-route="chatroom" class="layout vertical">
+            <paper-material>
+              {{activeChatroom.description}}
+            </paper-material>
+            <chat-window class="flex">
+              <template is="dom-repeat" items="{{activeChatroom.messages}}" as="msg">
+                <chat-message from="{{msg.from}}" message="{{msg.message}}"></chat-message>
+              </template>
+            </chat-window>
+            <chat-input id="chat-input" on-chat-input-send="sendMessage"></chat-input>
+          </section>
+        </iron-pages>
       </paper-scroll-header-panel>
     </paper-drawer-panel>
 
