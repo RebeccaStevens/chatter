@@ -238,7 +238,7 @@ gulp.task('clean', function() {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['lint', 'styles', 'elements', 'images'], function() {
+gulp.task('serve', ['styles', 'elements', 'images'], function() {
   browserSync({
     port: 5000,
     notify: false,
@@ -267,7 +267,7 @@ gulp.task('serve', ['lint', 'styles', 'elements', 'images'], function() {
   gulp.watch(['app/**/*.html'], reload);
   gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
   gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
-  gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['lint']);
+  gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}']);
   gulp.watch(['app/images/**/*'], reload);
 });
 
@@ -300,7 +300,7 @@ gulp.task('default', ['clean'], function(cb) {
   runSequence(
     ['copy', 'styles'],
     'elements',
-    ['lint', 'images', 'fonts', 'html'],
+    ['images', 'fonts', 'html'],
     'vulcanize', // 'cache-config',
     cb);
 });
