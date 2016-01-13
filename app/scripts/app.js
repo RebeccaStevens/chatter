@@ -44,7 +44,7 @@
   // set the active chatroom based on the given id
   app.setActiveChatRoom = function(id) {
     app.activeChatroomId = id;
-    app.initChatrooms();
+    app.chatroomsDataUpdated();
   };
 
   // set the active chatroom based on `app.activeChatroomId`
