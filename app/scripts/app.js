@@ -74,9 +74,11 @@
 
     if (app.activeChatroom) {
       app.set('activeChatroom.messagesAsArray',
-        Object.keys(app.activeChatroom.messages).map(function(key) {
-          return app.activeChatroom.messages[key];
-        })
+        app.activeChatroom.messages ?
+          Object.keys(app.activeChatroom.messages).map(function(key) {
+            return app.activeChatroom.messages[key];
+          })
+          : []
       );
     }
   };
