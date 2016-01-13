@@ -6,32 +6,6 @@
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
-  app.chatrooms = [
-    {
-      id: 'c0',
-      name: 'Chat Room 1',
-      description: 'chat and stuff',
-      messages: [
-        {
-          from: 'Bob',
-          message: 'Hello'
-        },
-        {
-          from: 'Tom',
-          message: 'Test\n123'
-        }
-      ]
-    },
-    {
-      id: 'c1',
-      name: 'Chat Room 2',
-      description: 'other stuff',
-      messages: []
-    }
-  ];
-
-  app.activeChatroom = app.chatrooms[0];
-
   // Sets app default base URL
   app.baseUrl = '/';
   if (window.location.port === '') {  // if production
@@ -69,8 +43,14 @@
 
   // set the active chatroom based on the given id
   app.setActiveChatRoom = function(id) {
+    app.activeChatroomId = id;
+    app.initChatrooms();
+  };
+
+  // set the active chatroom based on `app.activeChatroomId`
+  app._setActiveChatRoom = function() {
     app.chatrooms.forEach(function(e) {
-      if (e.id === id) {
+      if (e.__firebaseKey__ === app.activeChatroomId) {
         app.activeChatroom = e;
         return false;
       }
@@ -79,10 +59,27 @@
 
   app.sendMessage = function(event) {
     app.$['chat-input'].clearMessage();
-    app.push('activeChatroom.messages', {
-      from: event.detail.from,
-      message: event.detail.message
-    });
+
+    app.$.firebaseChatrooms.query.ref()
+      .child(app.activeChatroomId)
+      .child('messages')
+      .push().set({
+        from: event.detail.from,
+        message: event.detail.message
+      });
+  };
+
+  app.chatroomsDataUpdated = function() {
+    app._setActiveChatRoom();
+
+    if (app.activeChatroom) {
+      app.set('activeChatroom.messagesAsArray',
+        Object.keys(app.activeChatroom.messages).map(function(key) {
+          return app.activeChatroom.messages[key];
+        })
+      );
+      console.log(app.activeChatroom.messagesAsArray.length);
+    }
   };
 
 })(document);

@@ -74,6 +74,12 @@
 <body unresolved class="fullbleed layout vertical">
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
+    <firebase-collection
+      id="firebaseChatrooms"
+      order-by-child="name"
+      location="https://slaymaster3000-chatter.firebaseio.com/chatrooms/"
+      on-firebase-value="chatroomsDataUpdated"
+      data="{{chatrooms}}"></firebase-collection>
 
     <paper-drawer-panel id="paperDrawerPanel">
       <!-- Drawer Scroll Header Panel -->
@@ -90,7 +96,7 @@
             <span>Home</span>
           </a>
           <template is="dom-repeat" items="[[chatrooms]]" as="room">
-            <a href="chatroom/{{room.id}}">
+            <a href="chatroom/{{room.__firebaseKey__}}">
               <iron-icon icon="communication:chat"></iron-icon>
               <span>{{room.name}}</span>
             </a>
@@ -123,7 +129,7 @@
               {{activeChatroom.description}}
             </paper-material>
             <chat-window class="flex">
-              <template is="dom-repeat" items="{{activeChatroom.messages}}" as="msg">
+              <template is="dom-repeat" items="{{activeChatroom.messagesAsArray}}" as="msg">
                 <chat-message from="{{msg.from}}" message="{{msg.message}}"></chat-message>
               </template>
             </chat-window>
