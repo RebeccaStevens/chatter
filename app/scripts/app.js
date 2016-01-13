@@ -78,7 +78,6 @@
           return app.activeChatroom.messages[key];
         })
       );
-      console.log(app.activeChatroom.messagesAsArray.length);
     }
   };
 
