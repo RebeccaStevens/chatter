@@ -1,0 +1,9 @@
+{
+  "firebase": "slaymaster3000-chatter",
+  "public": "dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
