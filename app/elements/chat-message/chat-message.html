@@ -52,6 +52,7 @@
        */
       _messageChanged: function() {
         var msgDom = Polymer.dom(this.$.message);
+        msgDom.innerHTML = '';  // clear the current message
 
         var lines = this.message.split('\n');
         lines.forEach(function(line) {
