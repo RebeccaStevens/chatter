@@ -9,7 +9,6 @@
     "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
     "polymer": "Polymer/polymer#^1.2.0",
     "paper-menu": "PolymerElements/paper-menu#4fecb43601",
-    "juicy-html": "~1.0.1",
     "google-web-components": "GoogleWebComponents/google-web-components#~1.0.1"
   },
   "devDependencies": {

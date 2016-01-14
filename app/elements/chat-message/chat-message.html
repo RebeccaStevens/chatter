@@ -1,7 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
-<link rel="import" href="../../bower_components/juicy-html/juicy-html.html">
 
 <dom-module id="chat-message">
   <template>
@@ -24,7 +23,7 @@
     </style>
     <paper-material id="material" elevation="1">
       <div id="from">{{from}}:</div>
-      <template is="juicy-html" content$="[[_messageHTML]]"></template>
+      <div id="message"></div>
     </paper-material>
   </template>
   <script>
@@ -42,19 +41,22 @@
         message: {
           type: String,
           observer: '_messageChanged'
-        },
-
-        _messageHTML: {
-          type: String
-        },
+        }
       },
 
+      /**
+       * On `message` change.
+       *
+       * Can't simply use databinding like with `from` as this doesn't have
+       * support for multiline comments using '\n'.
+       */
       _messageChanged: function() {
-        this._messageHTML = '';
+        var msgDom = Polymer.dom(this.$.message);
 
         var lines = this.message.split('\n');
         lines.forEach(function(line) {
-          this._messageHTML += line + '<br>';
+          msgDom.appendChild(document.createTextNode(line));
+          msgDom.appendChild(document.createElement('br'));
         }.bind(this));
       }
     });
